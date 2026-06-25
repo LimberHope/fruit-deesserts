@@ -2,18 +2,16 @@ import Link from "next/link";
 
 const NavBar = () => {
   return (
-    <nav>
-      <div className="flex justify-between items-center p-4">
-        <Link className="px-5" href="/">
-          Home
-        </Link>
-        <Link className="px-5" href="/about">
-          About
-        </Link>
-        <Link className="px-5" href="/contact">
-          Contact
-        </Link>
-      </div>
+    <nav className="flex items-center justify-between p-4">
+      <div></div>
+      <Link href="/" className="font-bold text-xl">
+        Fruit Desserts
+      </Link>
+
+      <Link href="/">Home</Link>
+      <Link href="/recipes">Recipes</Link>
+      <Link href="/categories">Categories</Link>
+      <Link href="/about">About</Link>
     </nav>
   );
 };
