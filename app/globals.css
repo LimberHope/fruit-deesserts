@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: cursive;
+  --font-sans: var(--font-pacifico), cursive;
 }
 
 @layer base {
