@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useState } from "react";
+import ZoomElement from "./ZoomElement";
 
 const data = [
   {
@@ -100,29 +102,72 @@ const data = [
     price: 1000,
   },
 ];
+
+interface Item {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  price: number;
+}
+
 const Index = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+
+  const handleOpen = (item: Item, isOpen: boolean) => {
+    setIsOpen(isOpen);
+    setSelectedItem(item);
+  };
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
-      <div className="gap-8 sm:columns-1 md:columns-2 lg:columns-3">
-        {data.map((item, index) => (
-          <div className="p-4 bg-white text-center">
-            <Image
+    <>
+      {isOpen && (
+        <ZoomElement
+          image={selectedItem?.image!}
+          title={selectedItem?.title!}
+          handleClose={handleClose!}
+        />
+      )}
+      <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
+        <div className="gap-8 sm:columns-1 md:columns-2 lg:columns-3">
+          {data.map((item, index) => (
+            <div
+              className="p-4 bg-[#F2E6ED]/70 text-center border-2 border-gray-200 rounded-lg my-4"
               key={index}
-              src={item.image}
-              alt={item.title}
-              width={300}
-              height={200}
-              className="rounded-t-lg"
-            />
-            <div className="">
-              <h2 className="text-[#A89191]">{item.title}</h2>
-              <p className="text-gray-500">{item.description}</p>
-              <p className="text-gray-500">Bs.{item.price}</p>
+            >
+              <div className="relative">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  width={300}
+                  height={200}
+                  className={`rounded-t-lg`}
+                />
+                {!isOpen && (
+                <Image
+                  src={"/img/search-plus.svg"}
+                  alt={item.title}
+                  width={50}
+                  height={50}
+                  onClick={() => handleOpen(item, true)}
+                  className={`absolute top-0 right-0 p-2 hover:scale-100 transition-all duration-300 cursor-pointer`}
+                />
+                )}
+              </div>
+              <div>
+                <h2 className="text-[#A89191]">{item.title}</h2>
+                <p className="text-gray-500">{item.description}</p>
+                <p className="text-gray-500">Bs.{item.price}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
