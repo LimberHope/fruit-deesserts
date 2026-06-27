@@ -11,12 +11,10 @@ const ZoomElement = ({
   return (
     <div className="fixed z-50 w-full h-full bg-[#080707]/50 flex items-center justify-center">
       <div className="absolute">
-        <Image
+        <img
           src={image}
           alt={title}
-          width={500}
-          height={0}
-          className={`rounded-t-lg scale-110 transition-all duration-300`}
+          className={`rounded-t-lg scale-110 transition-all duration-300 w-full sm:w-[400px] md:w-[500px] lg:w-[600px] t-4`}
         />
         <Image
           src={"/img/search-minus.svg"}
