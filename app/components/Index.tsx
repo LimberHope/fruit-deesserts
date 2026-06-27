@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { useState } from "react";
 import ZoomElement from "./ZoomElement";
+import { useModalContext } from "@/src/context/modal.provider";
 
 const data = [
   {
@@ -112,27 +112,25 @@ interface Item {
 }
 
 const Index = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const { openModal, closeModal } = useModalContext();
 
-  const handleOpen = (item: Item, isOpen: boolean) => {
-    setIsOpen(isOpen);
-    setSelectedItem(item);
-  };
   const handleClose = () => {
-    setIsOpen(false);
+    closeModal("zoom");
+  };
+
+  const handleOpen = (item: Item) => {
+    openModal(
+      "zoom",
+      <ZoomElement
+        image={item.image}
+        title={item.title}
+        handleClose={handleClose}
+      />,
+    );
   };
 
   return (
-    <>
-      {isOpen && (
-        <ZoomElement
-          image={selectedItem?.image!}
-          title={selectedItem?.title!}
-          handleClose={handleClose!}
-        />
-      )}
-      <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
+    <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
         <div className="gap-8 sm:columns-1 md:columns-2 lg:columns-3">
           {data.map((item, index) => (
             <div
@@ -147,16 +145,14 @@ const Index = () => {
                   height={200}
                   className={`rounded-t-lg`}
                 />
-                {!isOpen && (
                 <Image
                   src={"/img/search-plus.svg"}
                   alt={item.title}
                   width={50}
                   height={50}
-                  onClick={() => handleOpen(item, true)}
-                  className={`absolute top-0 right-0 p-2 hover:scale-100 transition-all duration-300 cursor-pointer`}
+                  onClick={() => handleOpen(item)}
+                  className={`absolute top-0 right-0 p-2 hover:scale-150 transition-all duration-300 cursor-pointer`}
                 />
-                )}
               </div>
               <div>
                 <h2 className="text-[#A89191]">{item.title}</h2>
@@ -166,8 +162,7 @@ const Index = () => {
             </div>
           ))}
         </div>
-      </div>
-    </>
+    </div>
   );
 };
 
