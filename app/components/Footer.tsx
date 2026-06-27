@@ -44,11 +44,10 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-
-      <div className=""></div>
-
-    </footer>
+      <div className="border-t border-gray-300 pt-4 text-center text-xs">
+        <p>© {new Date().getFullYear()} HOPE WORLD. todos los derechos reservados.</p>
+      </div>
+    </footer >
   );
 };
-
 export default Footer;
