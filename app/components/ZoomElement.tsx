@@ -14,7 +14,7 @@ const ZoomElement = ({
         <img
           src={image}
           alt={title}
-          className={`rounded-t-lg scale-110 transition-all duration-300 w-full sm:w-[400px] md:w-[500px] lg:w-[600px] t-4`}
+          className={`rounded-t-lg scale-110 transition-all duration-300 w-full sm:w-[400px] md:w-[400px] lg:w-[500px] t-4`}
         />
         <Image
           src={"/img/search-minus.svg"}
