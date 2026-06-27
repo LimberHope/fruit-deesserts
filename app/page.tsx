@@ -1,10 +1,12 @@
+import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 
 const Home = () => {
   return (
-    <div>
+    <div className="flex flex-1 flex-col min-h-full">
       <NavBar />
-      hello here is the home page
+      <main className="flex-1">hello here is the home page</main>
+      <Footer />
     </div>
   );
 };
