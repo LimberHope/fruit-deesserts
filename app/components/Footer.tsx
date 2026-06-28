@@ -21,7 +21,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="whattssap:64065835" className="hover:underline flex justify-center">whatssap:64065835
+              <a href="whattssap:64065835" className="hover:underline flex justify-center">whatssap:64065835-75865501
                 <Image className="hover:scale-110 transition-all duration-300"
                   src={"/img/whatssap.svg"}
                   alt="whatssap"

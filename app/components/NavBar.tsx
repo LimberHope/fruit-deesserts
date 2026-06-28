@@ -1,5 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
 
 const NavBar = () => {
   return (
@@ -25,11 +31,21 @@ const NavBar = () => {
           />
         </Link>
       </div>
-      <div className="flex items-center justify-center p-4 bg-red-500 h-[50px]">
-        <Link href="/">Inicio</Link>
-        <Link href="/">Nosotros</Link>
-        <Link href="/">Contacto</Link>
+      <div>
+        <div className="flex flex-row bg-red-500 h-[50px] items-center justify-between gap-8 p-4">
+          <Link className={`${poppins.className}`} href="/">Productos enteros</Link>
+          <Link className={poppins.className} href="/">Nuestras masitas</Link>
+          <Link className={poppins.className} href="/">Coffee y salon de te</Link>
+          <Image className="hover:scale-110 transition-all duration-300"
+            src={"/img/sandi.svg"}
+            alt="sandi"
+            width={30}
+            height={30}
+          />
+        </div>
+        
       </div>
+
     </nav>
   );
 };
