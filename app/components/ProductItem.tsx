@@ -1,5 +1,5 @@
 import Image from "next/image";
-const ZoomElement = ({
+const ProductItem = ({
   image,
   title,
   handleClose,
@@ -29,4 +29,4 @@ const ZoomElement = ({
   );
 };
 
-export default ZoomElement;
+export default ProductItem;

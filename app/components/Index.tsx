@@ -1,6 +1,6 @@
 import Image from "next/image";
-import ZoomElement from "./ZoomElement";
 import { useModalContext } from "@/src/context/modal.provider";
+import ProductItem from "./ProductItem";
 
 const data = [
   {
@@ -121,7 +121,7 @@ const Index = () => {
   const handleOpen = (item: Item) => {
     openModal(
       "zoom",
-      <ZoomElement
+      <ProductItem
         image={item.image}
         title={item.title}
         handleClose={handleClose}
@@ -131,10 +131,10 @@ const Index = () => {
 
   return (
     <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
-        <div className="gap-8 sm:columns-1 md:columns-2 lg:columns-3">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.map((item, index) => (
             <div
-              className="p-4 bg-[#F2E6ED]/70 text-center border-2 border-gray-200 rounded-lg my-4"
+              className="p-4 bg-[#F2E6ED]/70 text-center border-2 border-gray-200 rounded-lg h-[490px]"
               key={index}
             >
               <div className="relative">
@@ -142,8 +142,8 @@ const Index = () => {
                   src={item.image}
                   alt={item.title}
                   width={300}
-                  height={200}
-                  className={`rounded-t-lg`}
+                  height={0}
+                  className={`rounded-t-lg h-[400px]`}
                 />
                 <Image
                   src={"/img/search-plus.svg"}
@@ -154,10 +154,8 @@ const Index = () => {
                   className={`absolute top-0 right-0 p-2 hover:scale-150 transition-all duration-300 cursor-pointer`}
                 />
               </div>
-              <div>
+              <div className="bg-[#000000]/80 h-[50px] flex items-center justify-center">
                 <h2 className="text-[#A89191]">{item.title}</h2>
-                <p className="text-gray-500">{item.description}</p>
-                <p className="text-gray-500">Bs.{item.price}</p>
               </div>
             </div>
           ))}
