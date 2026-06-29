@@ -1,7 +1,3 @@
-"use client";
-import { useModalContext } from "@/src/context/modal.provider";
-import ProductItem from "./ProductItem";
-
 const data = [
   {
     id: 1,
@@ -103,61 +99,39 @@ const data = [
   },
 ];
 
-interface Item {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  price: number;
-}
-
-const Index = () => {
-  const { openModal, closeModal } = useModalContext();
-
-  const handleClose = () => {
-    closeModal("zoom");
-  };
-
-  const handleOpen = (item: Item) => {
-    openModal(
-      "zoom",
-      <ProductItem
-        image={item.image}
-        title={item.title}
-        handleClose={handleClose}
-      />,
-    );
-  };
-
+const ProductsPage = () => {
   return (
     <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data.map((item, index) => (
-            <div
-              className="p-4 bg-[#F2E6ED]/70 text-center border-2 border-gray-200 rounded-lg h-[490px]"
-              key={index}
-            >
-              <div className="relative">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className={`rounded-t-lg h-[400px] w-[300px]`}
-                />
-                <img
-                  src={"/img/search-plus.svg"}
-                  alt={item.title}
-                  onClick={() => handleOpen(item)}
-                  className={`absolute top-0 right-0 p-2 hover:scale-150 transition-all duration-300 cursor-pointer w-[50px] h-[50px]`}
-                />
+      <div className="grid grid-cols-1 gap-4">
+        {data.map((item, index) => (
+          <div
+            className="flex flex-col sm:flex-row sm:items-center gap-2 p-4 bg-[#F2E6ED]/70 text-center border-2 border-gray-200 rounded-lg  max-w-[800px]"
+            key={index}
+          >
+            <img
+              src={item.image}
+              alt={item.title}
+              className="mx-auto block rounded-t-lg rounded-b-lg h-[450px] w-[400px]"
+            />
+            <div className="space-y-2 text-center sm:text-left">
+              <div className="space-y-0.5">
+                <p className="text-lg font-semibold text-black">
+                  Torta example
+                </p>
+                <p className="text-gray-500">
+                  Product Engineer Product EngineerProduct EngineerProduct
+                  EngineerProduct EngineerProduct EngineerProduct Engineer
+                </p>
               </div>
-              <div className="bg-[#000000]/80 h-[50px] flex items-center justify-center">
-                <h2 className="text-[#A89191]">{item.title}</h2>
-              </div>
+              <button className="border-purple-200 text-purple-600">
+                Message
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default Index;
+export default ProductsPage;

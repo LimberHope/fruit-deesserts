@@ -1,45 +1,61 @@
+"use client";
+
 import Link from "next/link";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const tabs = [
+  { href: "/products", label: "Productos enteros" },
+  { href: "/", label: "Nuestras masitas" },
+  { href: "/coffeLounge", label: "Coffee y salon de te" },
+] as const;
+
+const isActiveTab = (pathname: string, href: string) =>
+  href === "/" ? pathname === "/" : pathname.startsWith(href);
 
 const NavBar = () => {
+  const pathname = usePathname();
+
   return (
     <nav className="flex flex-col">
       <div className="flex items-center justify-center p-4 bg-[#F2D5D5] h-[125px]">
         <Link href="/" className="text-xl flex items-center">
-          <Image
-            className="hover:scale-110 transition-all duration-300"
+          <img
+            className="hover:scale-110 transition-all duration-300 w-[75px] h-[75px]"
             src={"/img/fresa.svg"}
             alt="fresa"
-            width={75}
-            height={75}
           />
           <p className="font-pacifico hover:border-b-2 hover:border-[#4AE7F0] text-[50px]">
             fruit dessert
           </p>
-          <Image
-            className="hover:scale-110 transition-all duration-300"
+          <img
+            className="hover:scale-110 transition-all duration-300 w-[75px] h-[75px]"
             src={"/img/arandano.svg"}
             alt="arandano"
-            width={75}
-            height={75}
           />
         </Link>
       </div>
       <div>
         <div className="flex flex-row bg-red-500 h-[50px] items-center justify-between gap-8 p-4">
-          <Link href="/">Productos enteros</Link>
-          <Link href="/">Nuestras masitas</Link>
-          <Link href="/">Coffee y salon de te</Link>
-          <Image className="hover:scale-110 transition-all duration-300"
+          {tabs.map((tab) => (
+            <Link
+              key={tab.href}
+              href={tab.href}
+              className={
+                isActiveTab(pathname, tab.href)
+                  ? "border-b-2 border-[#4AE7F0] font-medium"
+                  : "hover:border-b-2 hover:border-[#4AE7F0]"
+              }
+            >
+              {tab.label}
+            </Link>
+          ))}
+          <img
+            className="hover:scale-110 transition-all duration-300 w-[30px] h-[30px]"
             src={"/img/sandi.svg"}
             alt="sandi"
-            width={30}
-            height={30}
           />
         </div>
-        
       </div>
-
     </nav>
   );
 };
