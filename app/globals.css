@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: var(--font-pacifico), cursive;
+@theme inline {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-pacifico: var(--font-pacifico), cursive;
 }
 
 @layer base {
-  html {
-    @apply font-sans;
+  body {
+    @apply font-sans antialiased;
   }
 }

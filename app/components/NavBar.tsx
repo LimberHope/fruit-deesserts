@@ -1,11 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Poppins } from "next/font/google";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
 
 const NavBar = () => {
   return (
@@ -19,7 +13,7 @@ const NavBar = () => {
             width={75}
             height={75}
           />
-          <p className="hover:border-b-2 hover:border-[#4AE7F0] text-[50px]">
+          <p className="font-pacifico hover:border-b-2 hover:border-[#4AE7F0] text-[50px]">
             fruit dessert
           </p>
           <Image
@@ -33,9 +27,9 @@ const NavBar = () => {
       </div>
       <div>
         <div className="flex flex-row bg-red-500 h-[50px] items-center justify-between gap-8 p-4">
-          <Link className={`${poppins.className}`} href="/">Productos enteros</Link>
-          <Link className={poppins.className} href="/">Nuestras masitas</Link>
-          <Link className={poppins.className} href="/">Coffee y salon de te</Link>
+          <Link href="/">Productos enteros</Link>
+          <Link href="/">Nuestras masitas</Link>
+          <Link href="/">Coffee y salon de te</Link>
           <Image className="hover:scale-110 transition-all duration-300"
             src={"/img/sandi.svg"}
             alt="sandi"
