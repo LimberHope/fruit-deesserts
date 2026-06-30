@@ -1,3 +1,6 @@
+"use client";
+import { useEffect, useState } from "react";
+
 const data = [
   {
     id: 1,
@@ -99,7 +102,19 @@ const data = [
   },
 ];
 
+
 const ProductsPage = () => {
+  const [products, setProducts] = useState([]);	
+  useEffect(() => {
+    const getProducts = async () => {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/products`
+      );
+      const json = await response.json();
+      setProducts(json);
+    };
+    getProducts();
+  }, []);
   return (
     <div className="flex justify-center bg-[url('/image/fondo.jpg')] bg-fixed p-8">
       <div className="grid grid-cols-1 gap-4">
