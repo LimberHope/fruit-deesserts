@@ -4,28 +4,39 @@ import ProductItem from "./ProductItem";
 import { useEffect, useState } from "react";
 import AddProduct from "./AddProduct";
 
-interface Item {
+export interface Product {
   id: number;
   title: string;
   description: string;
-  imgUrl: string;
   price: number;
   category: string;
+  media: Image[];
+}
+
+export interface Image {
+  cover: boolean;
+  filename: string;
+  location: string;
+}
+
+
+const getCoverImage = (images: Image[]) => {
+  return images.find(img => img.cover)?.location;
 }
 
 const Index = () => {
   const { openModal, closeModal } = useModalContext();
-  const [products, setProducts] = useState<Item[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const handleClose = () => {
     closeModal("zoom");
   };
 
-  const handleOpen = (item: Item) => {
+  const handleOpen = (item: Product) => {
     openModal(
       "zoom",
       <ProductItem
-        imgUrl={item.imgUrl}
+        imgUrl={getCoverImage(item.media) ?? ""}
         description={item.description}
         title={item.title}
         handleClose={handleClose}
@@ -75,14 +86,14 @@ const Index = () => {
             >
               <div className="relative">
                 <img
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imgUrl}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/${getCoverImage(item.media) ?? ""}`}
                   alt={item.title}
                   className={`rounded-t-lg h-[400px] w-[300px]`}
                 />
                 <img
                   src={"/img/search-plus.svg"}
                   alt={item.title}
-                  onClick={() => handleOpen(item as Item)}
+                  onClick={() => handleOpen(item)}
                   className={`absolute top-0 right-0 p-2 hover:scale-150 transition-all duration-300 cursor-pointer w-[50px] h-[50px]`}
                 />
               </div>

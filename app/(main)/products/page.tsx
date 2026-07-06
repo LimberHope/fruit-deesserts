@@ -1,16 +1,13 @@
 "use client";
 import AddProduct from "@/app/components/AddProduct";
+import { Image, Product } from "@/app/components/Index";
 import { useModalContext } from "@/src/context/modal.provider";
 import { useEffect, useState } from "react";
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  imgUrl: string;
-  price: number;
-  category: string;
+const getCoverImage = (images: Image[]) => {
+  return images.find(img => img.cover)?.location;
 }
+
 const ProductsPage = () => {
   const { openModal, closeModal } = useModalContext();
   const [products, setProducts] = useState<Product[]>([]);
@@ -56,7 +53,7 @@ const ProductsPage = () => {
             key={index}
           >
             <img
-              src={`${process.env.NEXT_PUBLIC_API_URL}/${item.imgUrl}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${getCoverImage(item.media) ?? ""}`}
               alt={item.title}
               className="mx-auto block rounded-t-lg rounded-b-lg h-[450px] w-[400px]"
             />
