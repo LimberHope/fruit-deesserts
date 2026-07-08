@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const ProductItem = ({
   imgUrl,
   title,
@@ -30,13 +28,11 @@ const ProductItem = ({
             </button>
           </div>
         </div>
-        <Image
+        <img
           src={"/img/search-minus.svg"}
           alt={title}
-          width={50}
-          height={50}
           onClick={handleClose}
-          className={`absolute top-0 right-0 hover:scale-110 transition-all duration-300 cursor-pointer`}
+          className={`absolute top-0 right-0 hover:scale-110 transition-all duration-300 cursor-pointer w-[50px]`}
         />
       </div>
     </div>
